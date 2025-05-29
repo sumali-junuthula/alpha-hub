@@ -38,6 +38,32 @@ The project simulates a signal research desk at a modern hedge fund, combining s
 
 ---
 
+## 📦 Technologies Used
+
+AlphaHub leverages modern data and machine learning tools to collect signals, analyze sentiment, and predict stock movement.
+
+### 🧹 Data Collection
+- **requests** – Pulls data from news, Reddit, and Google Trends APIs
+- **pandas**, **datetime** – Cleans and processes time-series data
+- **dotenv** – Manages API keys securely
+
+### 🔍 Sentiment Analysis
+- **transformers**, **torch** – Uses DistilBERT for classifying sentiment from text
+- **pipeline("sentiment-analysis")** – Runs pre-trained NLP models on news and Reddit posts
+
+### 📊 Feature Engineering
+- **pandas**, **numpy** – Creates features like 3-day sentiment averages, trend scores, and price % change
+
+### 🧠 Machine Learning
+- **scikit-learn** – Trains a RandomForestClassifier to predict price direction
+- **train_test_split**, **classification_report**, **joblib** – For evaluation and model saving
+
+### ⚙️ System & Deployment
+- **venv**, **VS Code** – Development and environment setup
+- *(Optional)* **Flask**, **Streamlit**, or **Docker** – For deploying the prediction engine or dashboard
+
+---
+
 ## 🧠 Why AlphaHub?
 
 > AlphaHub is designed to push the boundary of what undergraduates can build — applying cutting-edge machine learning and autonomous agent frameworks to real-world financial data. The project replicates the **quantitative signal discovery process used at Citadel, Point72, and Renaissance Technologies**, making it a powerful portfolio piece for internships and research roles.
