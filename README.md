@@ -60,7 +60,6 @@ AlphaHub leverages modern data and machine learning tools to collect signals, an
 
 ### ⚙️ System & Deployment
 - **venv**, **VS Code** – Development and environment setup
-- *(Optional)* **Flask**, **Streamlit**, or **Docker** – For deploying the prediction engine or dashboard
 
 ---
 
