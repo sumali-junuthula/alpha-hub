@@ -1,1 +1,1 @@
-
+“Build a next-gen financial intelligence platform that forecasts stock movements using real-time, multi-source signals—including Reddit sentiment, Google Trends, news events, satellite imagery, and competitor analytics.”
