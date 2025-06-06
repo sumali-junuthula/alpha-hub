@@ -1,11 +1,49 @@
-“Build a next-gen financial intelligence platform that forecasts stock movements using real-time, multi-source signals—including Reddit sentiment, Google Trends, news events, satellite imagery, and competitor analytics.”
+# 🔮 AlphaHub
 
-🔎 1.2 Define the Use Cases (User Stories)
-ID	User Story
-UC1	As a user, I can search a company (by name or ticker) and see its predicted future stock prices for the next 7, 30, and 90 days.
-UC2	As a user, I can view a breakdown of sentiment from Reddit and recent news headlines with AI-generated summaries.
-UC3	As a user, I can see Google Trends interest over time and how it compares to competitor companies.
-UC4	As a user, I can view charts of competitors' stock performance, sentiment, and trends, and how that impacts the prediction for the target company.
-UC5	As a user, I can explore what factors (e.g., bad news for a competitor) are driving AlphaHub’s forecast.
-UC6	As a user, I can download raw signals and prediction CSVs for backtesting.
-UC7 (Admin)	As the owner, I can retrain models, monitor performance, and update data pipelines without downtime.
+**AI-Powered, Signal-Rich Stock Forecasting Platform**  
+*Future-facing forecasts. Signal-level insights. Built for quants.*
+
+---
+
+## 🧠 What is AlphaHub?
+
+AlphaHub is an advanced stock price forecasting platform that uses **multi-modal data** — Reddit sentiment, Google Trends, news headlines, competitor movements, and even satellite imagery — to generate accurate, explainable stock predictions over 7, 30, and 90-day horizons.
+
+It’s Bloomberg Terminal meets GPT-powered analytics — built to stand out in quant, hedge fund, and fintech recruiting pipelines.
+
+---
+
+## 🎯 Key Features
+
+| Feature                  | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| 🔍 Company Search         | Search by company name or ticker.                                           |
+| 📈 Forecast Visualization | View 7/30/90-day price forecasts with confidence bands.                    |
+| 🧠 Signal Dashboard       | Track Reddit mentions, sentiment scores, news spikes, and Google Trends.   |
+| 🔗 Competitor Analytics   | Analyze how peer companies impact the forecast.                            |
+| 📊 Explainable AI         | Understand the top features that drove the prediction.                     |
+| 🛰️ Satellite Integration  | (Optional) Visual activity scores from factory imagery.                    |
+| 💾 Export & API Access    | Download forecasts, connect via API, and run backtests.                    |
+
+---
+
+## 📦 Tech Stack
+
+| Layer                | Tools & Libraries                             |
+|----------------------|-----------------------------------------------|
+| Frontend (UI)        | React.js (Next.js), TailwindCSS, Chart.js     |
+| Backend (API)        | FastAPI, Uvicorn, CORS, yfinance              |
+| ML/AI                | PyTorch, scikit-learn, LSTM / Transformer     |
+| NLP/Sentiment        | HuggingFace Transformers (`finBERT`, `T5`)    |
+| Data Pipelines       | Reddit (PRAW), Google Trends (pytrends), NewsAPI |
+| Database             | PostgreSQL, Redis, or SQLite for MVP          |
+| Cloud (optional)     | Render, Vercel, S3, Railway, or GCP           |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/yourusername/AlphaHub.git
+cd AlphaHub
