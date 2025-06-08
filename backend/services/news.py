@@ -42,7 +42,7 @@ def get_news_articles(ticker):
     if not a.get("title") or not is_valid_url(a.get("url", "")):
       continue
     if "newsapi.org" in a["url"] or "example.com" in a["url"]:
-      continue  # skip junk sources
+      continue
 
     clean_articles.append({
       "title": a["title"],
