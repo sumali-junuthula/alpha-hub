@@ -42,11 +42,11 @@ export default function ForecastGraph({ forecast }) {
         pointHoverRadius: 6,
       },
       {
-        label: "Threshold",
+        label: "Avg Forecast",
         data: Array(forecast.prices.length).fill(avgPrice),
-        borderDash: [6, 6],
-        borderColor: "#9ca3af", // Tailwind gray-400
-        borderWidth: 1,
+        borderDash: [8, 5],
+        borderColor: "rgba(255, 255, 255, 0.4)",
+        borderWidth: 2,
         pointRadius: 0,
       },
     ],
