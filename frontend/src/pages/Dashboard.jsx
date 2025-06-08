@@ -14,7 +14,7 @@ export default function Dashboard() {
 
   const handleSearch = () => {
     if (!input) return;
-    setTicker(input);                             // Only update ticker when user clicks Search
+    setTicker(input);
     setForecast(null);
     setError("");
 
