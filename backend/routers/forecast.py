@@ -10,8 +10,18 @@ class ForecastResponse(BaseModel):
 
 @router.get("/", response_model=ForecastResponse)
 def get_forecast(ticker: str = Query(..., description="Stock ticker")):
-  # TODO: Replace with real forecast logic
+  # Just return mock data based on ticker hash
+  import hashlib
+  import datetime
+
+  # Deterministic hash to vary prices per ticker
+  base = sum(bytearray(ticker.encode())) % 100 + 100
+
+  today = datetime.date.today()
+  dates = [(today + datetime.timedelta(days=i)).isoformat() for i in range(3)]
+  prices = [round(base + i * 2 + (i % 2) * 0.4, 2) for i in range(3)]
+
   return {
-    "dates": ["2025-06-08", "2025-06-09", "2025-06-10"],
-    "prices": [192.4, 194.8, 198.1],
+    "dates": dates,
+    "prices": prices,
   }

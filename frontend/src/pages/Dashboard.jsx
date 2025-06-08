@@ -2,19 +2,25 @@ import React, { useState } from "react";
 import ForecastGraph from "../components/ForecastGraph";
 
 export default function Dashboard() {
-  const [ticker, setTicker] = useState("");
+  const [input, setInput] = useState("");         // This controls the input box
+  const [ticker, setTicker] = useState("");       // This triggers the search
   const [forecast, setForecast] = useState(null);
   const [error, setError] = useState("");
 
+  const temp_link = "https://refactored-goldfish-pj94qqjqvrgwh94jg-8000.app.github.dev";
+
   const handleSearch = () => {
-    if (!ticker) return;
-    fetch(`https://refactored-goldfish-pj94qqjqvrgwh94jg-8000.app.github.dev/forecast/?ticker=${ticker}`)
+    if (!input) return;
+    setTicker(input);                             // Only update ticker when user clicks Search
+    setForecast(null);
+    setError("");
+
+    fetch(`${temp_link}/forecast/?ticker=${input}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Forecast data:", data); // 👈 Add this
+        console.log("Forecast data:", data);
         setForecast(data);
       })
-      // .then((data) => setForecast(data.forecast))
       .catch((err) => {
         console.error(err);
         setError("Error fetching forecast data.");
@@ -31,8 +37,8 @@ export default function Dashboard() {
         <div className="flex items-center w-full bg-zinc-800 rounded-lg shadow-sm ring-1 ring-zinc-700 focus-within:ring-2 focus-within:ring-blue-500 transition mb-6">
           <input
             type="text"
-            value={ticker}
-            onChange={(e) => setTicker(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}  // Only updates local input
             placeholder="Search for a company or ticker"
             className="flex-1 bg-transparent px-4 py-3 text-white placeholder-zinc-400 outline-none"
           />
@@ -48,7 +54,7 @@ export default function Dashboard() {
 
         {forecast ? (
           <div className="mt-10">
-            <ForecastGraph forecast={forecast} />
+            <ForecastGraph key={ticker} forecast={forecast} />
           </div>
         ) : (
           <p className="text-center text-gray-400">No data yet — please enter a ticker.</p>
