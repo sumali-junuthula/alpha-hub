@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import ForecastGraph from "../components/ForecastGraph";
+import NewsFeed from "../components/NewsFeed";
+import RedditFeed from "../components/RedditFeed";
 
 export default function Dashboard() {
-  const [input, setInput] = useState("");         // This controls the input box
-  const [ticker, setTicker] = useState("");       // This triggers the search
+  const [input, setInput] = useState("");
+  const [ticker, setTicker] = useState("");
   const [forecast, setForecast] = useState(null);
   const [error, setError] = useState("");
+  const [redditPosts, setRedditPosts] = useState([]);
 
   const temp_link = "https://refactored-goldfish-pj94qqjqvrgwh94jg-8000.app.github.dev";
 
@@ -25,6 +28,10 @@ export default function Dashboard() {
         console.error(err);
         setError("Error fetching forecast data.");
       });
+    
+    fetch(`${temp_link}/reddit/?ticker=${ticker}`)
+      .then((res) => res.json())
+      .then((data) => setRedditPosts(data));
   };
 
   return (
@@ -55,6 +62,8 @@ export default function Dashboard() {
         {forecast ? (
           <div className="mt-10">
             <ForecastGraph key={ticker} forecast={forecast} />
+            <RedditFeed posts={redditPosts} />
+            <NewsFeed ticker={ticker} />
           </div>
         ) : (
           <p className="text-center text-gray-400">No data yet — please enter a ticker.</p>

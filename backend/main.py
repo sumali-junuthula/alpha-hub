@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import forecast
+from routers import forecast, reddit, news, google
 
 app = FastAPI()
 
@@ -13,6 +13,9 @@ app.add_middleware(
 )
 
 app.include_router(forecast.router, prefix="/forecast", tags=["forecast"])
+app.include_router(reddit.router, prefix="/reddit")
+app.include_router(news.router, prefix="/news")
+app.include_router(google.router, prefix="/google")
 # app.include_router(company.router, prefix="/company", tags=["company"])
 # app.include_router(signals.router, prefix="/signals", tags=["signals"])
 # app.include_router(strategy.router, prefix="/strategy", tags=["strategy"])
