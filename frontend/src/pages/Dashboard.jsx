@@ -1,17 +1,24 @@
-// src/pages/Dashboard.jsx
-
 import React, { useState } from "react";
+import ForecastGraph from "../components/ForecastGraph";
 
 export default function Dashboard() {
   const [ticker, setTicker] = useState("");
   const [forecast, setForecast] = useState(null);
+  const [error, setError] = useState("");
 
   const handleSearch = () => {
     if (!ticker) return;
-    fetch(`http://127.0.0.1:8000/forecast/?ticker=${ticker}`)
+    fetch(`https://refactored-goldfish-pj94qqjqvrgwh94jg-8000.app.github.dev/forecast/?ticker=${ticker}`)
       .then((res) => res.json())
-      .then((data) => setForecast(data.forecast))
-      .catch((err) => console.error("Forecast fetch error:", err));
+      .then((data) => {
+        console.log("Forecast data:", data); // 👈 Add this
+        setForecast(data);
+      })
+      // .then((data) => setForecast(data.forecast))
+      .catch((err) => {
+        console.error(err);
+        setError("Error fetching forecast data.");
+      });
   };
 
   return (
@@ -41,8 +48,7 @@ export default function Dashboard() {
 
         {forecast ? (
           <div className="mt-10">
-            {/* TODO: Insert ForecastGraph component here */}
-            <p className="text-green-400 text-center">Forecast loaded successfully!</p>
+            <ForecastGraph forecast={forecast} />
           </div>
         ) : (
           <p className="text-center text-gray-400">No data yet — please enter a ticker.</p>
