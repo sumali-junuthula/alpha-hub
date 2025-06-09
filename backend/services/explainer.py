@@ -1,9 +1,9 @@
-import os
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
-from config import OPENAI_API_KEY
+import os
 
 load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_summary(ticker, signals):
   prompt = f"""
@@ -16,15 +16,14 @@ Your summary should:
 - Include confidence if possible
 - Be concise and clear
 """
-  response = openai.ChatCompletion.create(
+  response = client.chat.completions.create(
     model="gpt-4",
     messages=[{"role": "user", "content": prompt}],
     temperature=0.4,
     max_tokens=300
   )
 
-  return response['choices'][0]['message']['content'].strip()
-
+  return response.choices[0].message.content.strip()
 
 def explain_forecast(ticker: str):
   # Replace this with dynamic signal fetching later

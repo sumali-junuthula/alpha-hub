@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import forecast, reddit, news, google, resolve, competitors, satellite, valuation, deals, earnings, dcf, risks, synergy, heatmap, explainer, sector
+from routers import forecast, reddit, news, google, resolve, competitors, satellite, valuation, deals, earnings, dcf, risks, synergy, heatmap, explainer, sector, positioning
 
 app = FastAPI()
 
@@ -28,6 +28,7 @@ app.include_router(synergy.router, prefix="/synergy")
 app.include_router(heatmap.router, prefix="/heatmap")
 app.include_router(explainer.router, prefix="/explainer")
 app.include_router(sector.router, prefix="/sector")
+app.include_router(positioning.router, prefix="/positioning")
 
 @app.get("/")
 def read_root():

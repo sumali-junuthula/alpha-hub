@@ -5,7 +5,7 @@ from services.valuation import get_company_profile
 router = APIRouter()
 
 @router.get("/")
-def fetch_heatmap(ticker: str = Query(...)):
+def fetch_heatmap(ticker: str = Query(..., description="Enter a valid ticker symbol (e.g. AMZN)")):
   try:
     profile = get_company_profile(ticker)
     industry = profile.get("industry", "")

@@ -31,6 +31,7 @@ export default function GoogleTrendsFeed({ ticker }) {
     fetch(`http://0.0.0.0:8000/google/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((d) => {
+        console.log("Google Trends data:", d)
         setData(d)
         if (d.interest.length >= 2) {
           const change = d.interest.at(-1) - d.interest.at(-2)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-export default function RiskDashboardPanel({ ticker }) {
+export default function RiskPanel({ ticker }) {
   const [risks, setRisks] = useState(null)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(true)
@@ -9,7 +9,7 @@ export default function RiskDashboardPanel({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:8000/risk/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:8000/risks/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setRisks(data)
@@ -24,7 +24,7 @@ export default function RiskDashboardPanel({ ticker }) {
 
   if (!ticker) return null
 
-  const renderRiskSection = (title, risksArray, color) => (
+  const renderRiskSection = (title, risksArray = [], color) => (
     <div className="mb-6">
       <h3 className={`text-lg font-bold ${color} mb-2`}>{title}</h3>
       <ul className="space-y-2">
@@ -50,13 +50,13 @@ export default function RiskDashboardPanel({ ticker }) {
       {error && <p className="text-red-400">{error}</p>}
       {!loading && risks && (
         <div className="text-sm text-zinc-300 space-y-4">
-          {renderRiskSection("Macro Risks", risks.macro_risks, "text-yellow-300")}
-          {renderRiskSection("Industry Risks", risks.industry_risks, "text-orange-300")}
-          {renderRiskSection("Company Risks", risks.company_risks, "text-rose-300")}
+          {renderRiskSection("Macro Risks", risks?.macro_risks || [], "text-yellow-300")}
+          {renderRiskSection("Industry Risks", risks?.industry_risks || [], "text-orange-300")}
+          {renderRiskSection("Company Risks", risks?.company_risks || [], "text-rose-300")}
 
           <div className="bg-zinc-800 p-4 rounded-lg border border-zinc-700">
             <h4 className="text-white font-semibold mb-1">🔎 LLM Summary</h4>
-            <p className="text-zinc-400">{risks.llm_generated_risk_summary}</p>
+            <p className="text-zinc-400">{risks?.llm_generated_risk_summary || "No summary available."}</p>
           </div>
         </div>
       )}

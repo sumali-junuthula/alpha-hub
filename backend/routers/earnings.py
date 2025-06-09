@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
-from services.earnings_sentiment import analyze_earnings_sentiment
+from services.earnings import analyze_earnings_sentiment
 
 router = APIRouter()
 

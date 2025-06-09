@@ -38,15 +38,21 @@ export default function Dashboard() {
     fetch(`${temp_link}/resolve/?query=${input}`)
       .then((res) => res.json())
       .then((resolveData) => {
-        const resolvedTicker = resolveData.ticker
+        const resolvedTicker = resolveData.resolved?.toUpperCase()
+        
+        if (!resolvedTicker) {
+          setError("Invalid company or ticker")
+          return
+        }
+        
         setTicker(resolvedTicker)
 
-        fetch(`${temp_link}/company/?ticker=${resolvedTicker}`)
-          .then((res) => res.json())
-          .then((metaData) => setCompany(metaData))
-          .catch((err) => {
-            console.error("Company metadata fetch error:", err)
-          })
+        // fetch(`${temp_link}/company/?ticker=${resolvedTicker}`)
+        //   .then((res) => res.json())
+        //   .then((metaData) => setCompany(metaData))
+        //   .catch((err) => {
+        //     console.error("Company metadata fetch error:", err)
+        //   })
 
         fetch(`${temp_link}/forecast/?ticker=${resolvedTicker}`)
           .then((res) => res.json())

@@ -9,7 +9,7 @@ export default function ExplainPanel({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:8000/explainer?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:8000/explainer/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setExplanation(data)
