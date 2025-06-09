@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import forecast, reddit, news, google, resolve, competitors, satellite, valuation, deals, earnings, dcf, risks, synergy, heatmap, explainer, sector
+from routes import forecast, reddit, news, google, resolve, competitors, satellite, valuation, deals, earnings, dcf, risks, synergy, heatmap, explainer, sector
 
 app = FastAPI()
 
