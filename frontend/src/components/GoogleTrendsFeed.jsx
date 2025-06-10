@@ -28,7 +28,7 @@ export default function GoogleTrendsFeed({ ticker }) {
   useEffect(() => {
     if (!ticker) return
 
-    fetch(`http://0.0.0.0:8000/google/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:10000/google/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((d) => {
         console.log("Google Trends data:", d)
