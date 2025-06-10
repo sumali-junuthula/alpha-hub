@@ -56,6 +56,42 @@ def median_or_average(data, key):
   n = len(values)
   return values[n // 2] if n % 2 == 1 else (values[n // 2 - 1] + values[n // 2]) / 2
 
+def generate_sensitivity_matrix(base_metric, multiples, scale=1e9):
+  """
+  Create a sensitivity matrix for different multiples applied to a financial metric (e.g., EBITDA).
+  """
+  header_row = [""] + [f"{x}x" for x in multiples]
+  matrix = [header_row]
+
+  for scale_factor in [0.9, 1.0, 1.1]:  # +/-10% of base
+    scaled_metric = base_metric * scale_factor
+    row = [f"${scaled_metric/scale:.0f}B"]
+    for multiple in multiples:
+      implied_ev = scaled_metric * multiple
+      row.append(f"${implied_ev/scale:.0f}B")
+    matrix.append(row)
+
+  return matrix
+
+def generate_share_price_matrix(metric_name, base_metric, net_debt, shares_out, multiples, scale=1e9):
+  """
+  Generate a sensitivity matrix of implied share prices based on valuation multiples.
+  """
+  header_row = [f"{metric_name} ↓ / Multiple →"] + [f"{x}x" for x in multiples]
+  matrix = [header_row]
+
+  for scale_factor in [0.9, 1.0, 1.1]:  # -10%, Base, +10%
+    scaled_metric = base_metric * scale_factor
+    row = [f"${scaled_metric/scale:.1f}B"]
+    for multiple in multiples:
+      ev = scaled_metric * multiple
+      equity = ev - net_debt
+      price = equity / shares_out
+      row.append(f"${price:.2f}")
+    matrix.append(row)
+
+  return matrix
+
 def build_valuation_model(ticker):
   profile = get_company_profile(ticker)
   ratios = get_ratios(ticker)
@@ -87,8 +123,8 @@ def build_valuation_model(ticker):
 
   # Current ratios
   pe = float(ratios.get("priceEarningsRatioTTM", 0))
-  ev_ebitda = float(ratios.get("evToEbitdaTTM", 0))
-  ev_sales = float(ratios.get("evToSalesTTM", 0))
+  ev_ebitda = float(ratios.get("evToEbitdaTTM") or ratios.get("enterpriseValueOverEBITDA") or 0)
+  ev_sales = float(ratios.get("evToSalesTTM") or ratios.get("enterpriseValueOverRevenue") or 0)
 
   # Financials
   ebitda = float(income.get("ebitda", 0))
@@ -106,8 +142,20 @@ def build_valuation_model(ticker):
   ebitda_equity = ev_ebitda_val - net_debt
   sales_equity = ev_sales_val - net_debt
 
+  total_debt = float(ev_data.get("totalDebt") or 0)
+  cash = float(ev_data.get("cashAndShortTermInvestments") or 0)
+  net_debt = total_debt - cash
+
   # DCF block
   dcf = calculate_dcf(ticker)
+
+  sensitivity_matrix = generate_share_price_matrix(
+    metric_name="EBITDA",
+    base_metric=ebitda,
+    net_debt=net_debt,
+    shares_out=shares_out,
+    multiples=[10, 12, 14]
+  )
 
   return {
     "ticker": ticker.upper(),
@@ -143,11 +191,6 @@ def build_valuation_model(ticker):
       "equity_value": ebitda_equity,
       "share_price": round(ebitda_equity / shares_out, 2)
     },
-    "sensitivity_matrix": [
-      ["", "10x", "12x", "14x"],
-      ["$100B", "$120B", "$140B"],
-      ["$120B", "$144B", "$168B"],
-      ["$140B", "$168B", "$196B"]
-    ],
+    "sensitivity_matrix": sensitivity_matrix,
     "summary": generate_llm_summary(company_name, industry, pe_equity, ev_ebitda_val, ev_sales_val)
   }

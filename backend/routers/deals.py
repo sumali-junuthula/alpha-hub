@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
-from services.deal_radar import get_recent_deals
+from services.deals import get_recent_deals
 
 router = APIRouter()
 

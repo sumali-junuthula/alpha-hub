@@ -4,14 +4,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 FMP_URL = "https://financialmodelingprep.com/api/v3"
+FMP_API_KEY = os.getenv("FMP_API_KEY")
+FMP_API_KEY_POS = os.getenv("FMP_API_KEY_POS")
 
 BING_API_KEY = os.getenv("BING_API_KEY")
 
 KEYWORDS_POSITIVE = ["beat expectations", "strong", "growth", "record", "above estimate", "profit"]
 KEYWORDS_NEGATIVE = ["missed expectations", "weak", "decline", "below estimate", "loss", "cut guidance"]
 
-# API Keys
-FMP_API_KEY = os.getenv("FMP_API_KEY")
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 GOOGLE_TRENDS_API_KEY = os.getenv("GOOGLE_TRENDS_API_KEY")

@@ -1,4 +1,3 @@
-# backend/routes/news.py
 from fastapi import APIRouter, Query
 from services.news import get_news_articles
 

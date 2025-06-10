@@ -87,7 +87,7 @@ export default function Dashboard() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Search for a company or ticker"
+            placeholder="Please enter a ticker"
             className="flex-1 bg-transparent px-4 py-3 text-white placeholder-zinc-400 outline-none"
           />
           <button

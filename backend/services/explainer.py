@@ -1,9 +1,11 @@
+import os
 from openai import OpenAI
 from dotenv import load_dotenv
-import os
+from services.signal_fusion import collect_signals
+from config import OPENAI_API_KEY
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def generate_summary(ticker, signals):
   prompt = f"""
@@ -25,14 +27,9 @@ Your summary should:
 
   return response.choices[0].message.content.strip()
 
-def explain_forecast(ticker: str):
-  # Replace this with dynamic signal fetching later
-  signals = {
-    "Reddit": "Spike in mentions (120%) — bullish sentiment",
-    "News": "Positive sentiment (0.74) — Apple beats earnings",
-    "Google": "Surge in search volume last 7 days",
-    "Competitor": "Samsung delays launch — favorable for Apple"
-  }
+def explain_forecast(ticker):
+  # 🚀 Use real collected signals
+  signals = collect_signals(ticker)
 
   summary = generate_summary(ticker, signals)
 

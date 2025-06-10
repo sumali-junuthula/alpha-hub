@@ -28,6 +28,18 @@ def fetch_wacc(ticker):
     return float(data[0].get("wacc", 0.10))
   return 0.10
 
+# def fetch_shares_outstanding(ticker):
+#   url = f"{FMP_URL}/profile/{ticker}?apikey={FMP_API_KEY}"
+#   data = get_json(url)
+  
+#   if data and isinstance(data, list):
+#     shares = data[0].get("sharesOutstanding")
+#     if shares is not None and isinstance(shares, (int, float)) and shares > 0:
+#       return float(shares)
+  
+#   print(f"⚠️ Warning: Could not find valid sharesOutstanding for {ticker}. Defaulting to 1.")
+#   return 1
+
 def calculate_dcf(ticker):
   # 1. Pull historical free cash flow
   url = f"{FMP_URL}/cash-flow-statement/{ticker}?limit=5&apikey={FMP_API_KEY}"
@@ -43,7 +55,7 @@ def calculate_dcf(ticker):
   projected_fcfs = [fcfs[-1] * (1 + growth_rate) ** i for i in range(1, 6)]
 
   # 3. Estimate WACC (placeholder value for now)
-  wacc = 0.085  # Could improve using capital structure later
+  wacc = fetch_wacc(ticker) or 0.085
   terminal_growth_rate = 0.025
 
   # 4. Discount projected FCFs
@@ -54,6 +66,9 @@ def calculate_dcf(ticker):
   terminal_npv = terminal_value / (1 + wacc) ** len(projected_fcfs)
 
   total_dcf = npv + terminal_npv
+
+  # shares = fetch_shares_outstanding(ticker)
+  # per_share_value = total_dcf / shares
 
   return {
     "dcf_summary": {

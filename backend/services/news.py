@@ -1,5 +1,5 @@
-import requests
 import os
+import requests
 from urllib.parse import urlparse
 from datetime import datetime
 from dotenv import load_dotenv

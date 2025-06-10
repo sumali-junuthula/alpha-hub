@@ -1,20 +1,13 @@
-from fastapi import APIRouter, Query
-from datetime import datetime, timedelta
+from fastapi import APIRouter, Query, HTTPException
+from services.satellite import fetch_satellite_data, extract_competitor_insight
 
 router = APIRouter()
 
-@router.get("/")
-def get_satellite_signal(ticker: str = Query(..., min_length=1)):
-  base_date = datetime.today()
-  days = [base_date - timedelta(days=i) for i in range(10)]
-  dates = [d.strftime("%Y-%m-%d") for d in reversed(days)]
+@router.get("/satellite/")
+def get_satellite_insight(ticker: str = Query(..., description="Stock ticker")):
+  raw_data = fetch_satellite_data(ticker)
+  if not raw_data:
+    raise HTTPException(status_code=500, detail="Failed to fetch satellite data.")
 
-  # Simulated proxy data (e.g., parking lot traffic index 0-100)
-  mock_activity = [50, 52, 55, 58, 53, 60, 65, 70, 68, 75]
-
-  return {
-    "ticker": ticker.upper(),
-    "signal": mock_activity,
-    "dates": dates,
-    "metric": "Estimated Location Activity"
-  }
+  insight = extract_competitor_insight(raw_data)
+  return insight
