@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "http://0.0.0.0:8000"
+BASE_URL = "http://0.0.0.0:10000"
 
 def fetch_signal(endpoint, ticker):
   try:
