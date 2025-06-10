@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
-from services.signal_fusion import collect_signals
+from services.helper.signal_fusion import collect_signals
 from config import OPENAI_API_KEY
 
 load_dotenv()
