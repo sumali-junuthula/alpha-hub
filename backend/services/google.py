@@ -1,8 +1,10 @@
+import time
 from pytrends.request import TrendReq
 from datetime import datetime, timedelta
 
 def fetch_google_trends(ticker: str):
   pytrends = TrendReq(hl='en-US', tz=360)
+  time.sleep(5)
   
   today = datetime.today()
   last_3_months = today - timedelta(days=90)
