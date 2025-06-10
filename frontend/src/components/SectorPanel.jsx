@@ -9,7 +9,7 @@ export default function SectorCommentaryPanel({ sector }) {
     if (!sector) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:10000/sector/?sector=${sector}`)
+    fetch(`https://alpha-hub-backend.onrender.com/sector/?sector=${sector}`)
       .then((res) => res.json())
       .then((data) => {
         setCommentary(data)
