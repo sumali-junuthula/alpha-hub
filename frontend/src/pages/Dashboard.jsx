@@ -24,7 +24,7 @@ export default function Dashboard() {
   const [error, setError] = useState("")
   const [redditPosts, setRedditPosts] = useState([])
 
-  const temp_link = "http://0.0.0.0:8000"
+  const temp_link = "http://0.0.0.0:10000"
 
   const handleSearch = () => {
     if (!input) return
