@@ -9,7 +9,7 @@ export default function DealRadarPanel({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:8000/deals/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:10000/deals/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setDeals(data.deals || [])
