@@ -12,38 +12,7 @@ export default function RiskPanel({ ticker }) {
     fetch(`https://alpha-hub-backend.onrender.com/risks/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Raw risk data:", data)
-
-        const normalizeSection = (section) => {
-          if (!section) return []
-          // Handle case: section is [{ Risk 1: {...}, Risk 2: {...} }]
-          if (Array.isArray(section) && typeof section[0] === "object") {
-            const risksObj = section[0]
-            return Object.entries(risksObj).map(([key, value]) => ({
-              title: key,
-              summary: value.Description,
-              impact: value.Impact,
-            }))
-          }
-          // Handle case: section is already an array of risks (fallback)
-          return []
-        }
-
-        const summary =
-          data["LLM Summary"] ||
-          data["LLM-generated Summary"] ||
-          data["LLM Generated Summary"] ||
-          "No summary available."
-
-        const normalized = {
-          macro_risks: normalizeSection(data["Macroeconomic Risks"]),
-          industry_risks: normalizeSection(data["Industry Risks"]),
-          company_risks: normalizeSection(data["Company Risks"]),
-          llm_generated_risk_summary: summary,
-        }
-
-        console.log("Normalized risks:", normalized)
-        setRisks(normalized)
+        setRisks(data)
         setLoading(false)
       })
       .catch((err) => {
