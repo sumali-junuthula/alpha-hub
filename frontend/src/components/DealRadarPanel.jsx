@@ -9,7 +9,7 @@ export default function DealRadarPanel({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:10000/deals/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/deals/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setDeals(data.deals || [])
