@@ -14,7 +14,7 @@ export default function SynergySimulator() {
     setError("")
     setResult(null)
 
-    const url = `http://0.0.0.0:10000/synergy/?target_revenue=${revenue}&target_margin=${margin}&expected_synergies=${synergies}&deal_cost=${dealCost}`
+    const url = `https://alpha-hub-backend.onrender.com/synergy/?target_revenue=${revenue}&target_margin=${margin}&expected_synergies=${synergies}&deal_cost=${dealCost}`
 
     try {
       const res = await fetch(url)
