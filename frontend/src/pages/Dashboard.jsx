@@ -24,7 +24,7 @@ export default function Dashboard() {
   const [error, setError] = useState("")
   const [redditPosts, setRedditPosts] = useState([])
 
-  const temp_link = "http://0.0.0.0:10000"
+  const temp_link = "https://alpha-hub-backend.onrender.com"
 
   const handleSearch = () => {
     if (!input) return
