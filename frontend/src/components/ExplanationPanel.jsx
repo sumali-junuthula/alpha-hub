@@ -9,7 +9,7 @@ export default function ExplainPanel({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:10000/explainer/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/explainer/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setExplanation(data)
