@@ -11,7 +11,7 @@ export default function EarningsSentimentPanel({ ticker }) {
     setData(null)
     setError("")
 
-    fetch(`http://0.0.0.0:10000/earnings/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/earnings/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((d) => setData(d))
       .catch((err) => {
