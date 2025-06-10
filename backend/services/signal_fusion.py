@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "http://0.0.0.0:10000"
+BASE_URL = "https://alpha-hub-backend.onrender.com"
 
 def fetch_signal(endpoint, ticker):
   try:
