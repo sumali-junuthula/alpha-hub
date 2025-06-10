@@ -8,7 +8,7 @@ export default function CompetitorSignalFeed({ ticker }) {
 
   useEffect(() => {
     if (!ticker) return
-    fetch(`https://alpha-hub-backend.onrender.com/positioning/?ticker=${ticker}/competitors/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/competitors/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setCompetitors(data.competitors)
