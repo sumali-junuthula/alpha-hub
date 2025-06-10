@@ -6,7 +6,7 @@ export default function ValuationPanel({ ticker }) {
 
   useEffect(() => {
     if (!ticker) return
-    fetch(`http://0.0.0.0:10000/valuation/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/valuation/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => setValuation(data))
       .catch((err) => {
