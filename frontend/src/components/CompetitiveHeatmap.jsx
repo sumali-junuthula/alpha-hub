@@ -10,7 +10,7 @@ export default function CompetitiveHeatmap({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:10000/positioning/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/positioning/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((json) => {
         setData(json.metrics || [])
