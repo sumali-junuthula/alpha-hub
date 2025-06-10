@@ -6,7 +6,7 @@ export default function ValuationPanel({ ticker }) {
 
   useEffect(() => {
     if (!ticker) return
-    fetch(`http://0.0.0.0:8000/valuation/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:10000/valuation/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => setValuation(data))
       .catch((err) => {
