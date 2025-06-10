@@ -8,7 +8,7 @@ export default function NewsFeed({ ticker }) {
   useEffect(() => {
     if (!ticker) return;
     setArticles([]); // reset
-    fetch(`http://0.0.0.0:10000/news/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/news/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
