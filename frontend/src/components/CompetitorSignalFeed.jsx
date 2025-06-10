@@ -8,7 +8,7 @@ export default function CompetitorSignalFeed({ ticker }) {
 
   useEffect(() => {
     if (!ticker) return
-    fetch(`http://0.0.0.0:8000/competitors/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:10000/competitors/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setCompetitors(data.competitors)
