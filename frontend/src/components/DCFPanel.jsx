@@ -9,7 +9,7 @@ export default function DCFPanel({ ticker }) {
     if (!ticker) return
 
     setLoading(true)
-    fetch(`http://0.0.0.0:8000/dcf/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:10000/dcf/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((data) => {
         setDCF(data?.dcf_summary || null)
