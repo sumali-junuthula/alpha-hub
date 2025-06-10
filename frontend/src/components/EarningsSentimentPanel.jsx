@@ -11,7 +11,7 @@ export default function EarningsSentimentPanel({ ticker }) {
     setData(null)
     setError("")
 
-    fetch(`http://0.0.0.0:8000/earnings/?ticker=${ticker}`)
+    fetch(`http://0.0.0.0:10000/earnings/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((d) => setData(d))
       .catch((err) => {
