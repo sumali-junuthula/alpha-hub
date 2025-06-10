@@ -27,7 +27,7 @@ export default function SatelliteSignalFeed({ ticker }) {
   useEffect(() => {
     if (!ticker) return
 
-    fetch(`http://0.0.0.0:10000/satellite/?ticker=${ticker}`)
+    fetch(`https://alpha-hub-backend.onrender.com/satellite/?ticker=${ticker}`)
       .then((res) => res.json())
       .then((d) => setData(d))
       .catch((err) => {
