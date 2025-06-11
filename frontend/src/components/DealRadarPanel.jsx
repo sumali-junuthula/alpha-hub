@@ -26,7 +26,7 @@ export default function DealRadarPanel({ ticker }) {
 
   return (
     <div className="mt-10">
-      <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-blue-200 drop-shadow-lg mb-6 tracking-tight">
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-6">
         🤝 Deal Radar
       </h2>
 
