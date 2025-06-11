@@ -18,106 +18,133 @@ export default function ValuationPanel({ ticker }) {
   if (!ticker) return null
 
   return (
-    <div className="mt-10 bg-zinc-900 p-6 rounded-2xl shadow-xl ring-1 ring-zinc-800 space-y-8">
-      <h2 className="text-2xl font-bold text-purple-300 mb-2">💰 Valuation Dashboard</h2>
+    <div className="mt-10">
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-6">
+        💰 Valuation Overview
+      </h2>
 
       {error && <p className="text-red-400">{error}</p>}
-      {!valuation && !error && <p className="text-gray-400">Fetching valuation data...</p>}
+      {!valuation && !error && <p className="text-gray-400">Loading valuation data...</p>}
 
       {valuation && (
-        <>
-          {/* Multiples Section */}
-          <section>
-            <h3 className="text-lg text-cyan-300 font-semibold mb-2">📊 Comparable Company Multiples</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {valuation.peer_multiples.map((comp, idx) => (
-                <div key={idx} className="bg-zinc-800 p-4 rounded-lg border border-zinc-700 space-y-2">
-                  <h4 className="text-white font-medium">{comp.name}</h4>
-                  <ul className="text-sm text-zinc-400 space-y-1">
+        <div className="flex flex-col space-y-6">
+          {/* Card Component */}
+          {[
+            {
+              icon: "📊 | 🔍",
+              title: "Comparable Company Multiples",
+              content: valuation.peer_multiples.map((comp, idx) => (
+                <div key={idx}>
+                  <p className="text-white font-semibold">{comp.name}</p>
+                  <ul className="text-sm text-zinc-400 pl-3 space-y-1">
                     <li>P/E: {comp.pe.toFixed(2)}</li>
                     <li>EV/EBITDA: {comp.ev_ebitda}</li>
                     <li>EV/Revenue: {comp.ev_sales}</li>
                     <li>Market Cap: ${comp.market_cap.toLocaleString()}</li>
                   </ul>
                 </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Precedent Transactions */}
-          {valuation.transactions?.length > 0 && (
-            <section>
-              <h3 className="text-lg text-cyan-300 font-semibold mb-2">🤝 Precedent Transactions</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {valuation.transactions.map((tx, idx) => (
-                  <div key={idx} className="bg-zinc-800 p-4 rounded-lg border border-zinc-700 space-y-1">
-                    <p>
-                      <span className="text-white font-medium">{tx.target}</span> acquired by {tx.acquirer}
-                    </p>
-                    <ul className="text-sm text-zinc-400 pl-2 space-y-1">
-                      <li>EV/Revenue: {tx.ev_rev}</li>
-                      <li>EV/EBITDA: {tx.ev_ebitda}</li>
+              ))
+            },
+            {
+              icon: "🤝 | 📁",
+              title: "Precedent Transactions",
+              content: valuation.transactions?.length
+                ? valuation.transactions.map((tx, idx) => (
+                    <div key={idx}>
+                      <p className="text-white font-semibold">{tx.target}</p>
+                      <p className="text-sm text-zinc-400">Acquired by {tx.acquirer}</p>
+                      <ul className="text-sm text-zinc-400 pl-3 space-y-1">
+                        <li>EV/Revenue: {tx.ev_rev}</li>
+                        <li>EV/EBITDA: {tx.ev_ebitda}</li>
+                      </ul>
+                    </div>
+                  ))
+                : <p className="text-sm text-zinc-400">No recent deals found.</p>
+            },
+            {
+              icon: "📈 | 💵",
+              title: "Valuation Summary",
+              content: (
+                <ul className="text-sm text-zinc-300 space-y-2">
+                  <li><span className="text-white font-medium">P/E Implied Equity:</span> ${valuation.valuation_summary.pe_implied_equity.toLocaleString()}</li>
+                  <li><span className="text-white font-medium">EBITDA-based EV:</span> ${valuation.valuation_summary.ev_ebitda_implied_ev.toLocaleString()}</li>
+                  <li><span className="text-white font-medium">Sales-based EV:</span> ${valuation.valuation_summary.ev_sales_implied_ev.toLocaleString()}</li>
+                  <li>
+                    <span className="text-white font-medium">Implied Share Price Range:</span>
+                    <ul className="pl-4 space-y-1">
+                      <li>• PE-based: ${valuation.valuation_summary.share_price_range.pe_based.toLocaleString()}</li>
+                      <li>• EBITDA-based: ${valuation.valuation_summary.share_price_range.ebitda_based.toLocaleString()}</li>
+                      <li>• Sales-based: ${valuation.valuation_summary.share_price_range.sales_based.toLocaleString()}</li>
                     </ul>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Valuation Summary */}
-          <section>
-            <h3 className="text-lg text-cyan-300 font-semibold mb-2">📈 Valuation Summary</h3>
-            <div className="bg-zinc-800 p-4 rounded-lg border border-zinc-700 space-y-2 text-sm text-zinc-300">
-              <p><span className="text-white font-medium">P/E Implied Equity:</span> ${valuation.valuation_summary.pe_implied_equity.toLocaleString()}</p>
-              <p><span className="text-white font-medium">EBITDA-based EV:</span> ${valuation.valuation_summary.ev_ebitda_implied_ev.toLocaleString()}</p>
-              <p><span className="text-white font-medium">Sales-based EV:</span> ${valuation.valuation_summary.ev_sales_implied_ev.toLocaleString()}</p>
-              <div>
-                <span className="text-white font-medium">Implied Share Price Range:</span>
-                <ul className="pl-4 space-y-1">
-                  <li>• PE-based: ${valuation.valuation_summary.share_price_range.pe_based.toLocaleString()}</li>
-                  <li>• EBITDA-based: ${valuation.valuation_summary.share_price_range.ebitda_based.toLocaleString()}</li>
-                  <li>• Sales-based: ${valuation.valuation_summary.share_price_range.sales_based.toLocaleString()}</li>
+                  </li>
                 </ul>
-              </div>
+              )
+            },
+            valuation.dcf_value && {
+              icon: "💡 | 📊",
+              title: "DCF Valuation",
+              content: (
+                <p className="text-sm text-zinc-300">
+                  Estimated Value (Discounted Cash Flow): ${valuation.dcf_value.toLocaleString()}
+                </p>
+              )
+            },
+            valuation.sensitivity_matrix && {
+              icon: "🧪 | 🔬",
+              title: "Sensitivity Matrix",
+              content: (
+                <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-5 transition-all duration-300 ease-in-out hover:border-blue-500 hover:shadow-[0_0_10px_#3b82f6]">
+                  <p className="text-sm text-blue-400 mb-2">🧪 | 🔬</p>
+                  <h3 className="text-lg font-bold text-blue-200 mb-4">Sensitivity Matrix</h3>
+
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm text-zinc-300 border-collapse">
+                      <thead>
+                        <tr className="text-blue-300 border-b border-zinc-700">
+                          <th className="px-3 py-2 text-left">Metric</th>
+                          {Object.keys(valuation.sensitivity_matrix[0]).filter(key => key !== "metric").map((col, idx) => (
+                            <th key={idx} className="px-3 py-2 text-left">{col}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {valuation.sensitivity_matrix.map((row, idx) => (
+                          <tr key={idx} className="border-b border-zinc-800 hover:bg-zinc-800/50">
+                            <td className="px-3 py-2 font-medium text-white">{row.metric}</td>
+                            {Object.keys(row).filter(k => k !== "metric").map((k, i) => (
+                              <td key={i} className="px-3 py-2">{row[k]}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )
+            },
+            valuation.commentary && {
+              icon: "🧠 | 📌",
+              title: "Analyst Commentary",
+              content: (
+                <p className="text-sm text-zinc-300 italic">{valuation.commentary}</p>
+              )
+            }
+          ].filter(Boolean).map((section, idx) => (
+            <div
+              key={idx}
+              className="bg-zinc-900 border border-zinc-700 rounded-2xl p-5 transition-all duration-300 ease-in-out hover:border-blue-500 hover:shadow-[0_0_10px_#3b82f6]"
+            >
+              <p className="text-sm text-blue-400 mb-2">{section.icon}</p>
+              <h3 className="text-lg font-bold text-blue-200 mb-3">{section.title}</h3>
+              {section.content}
             </div>
-          </section>
+          ))}
 
-          {/* DCF Section */}
-          {valuation.dcf_value && (
-            <section>
-              <h3 className="text-lg text-green-300 font-semibold mb-2">💡 DCF Valuation Cross-check</h3>
-              <p className="text-sm text-zinc-300 bg-zinc-800 p-4 rounded-lg border border-zinc-700">
-                Estimated Value (Discounted Cash Flow): ${valuation.dcf_value.toLocaleString()}
-              </p>
-            </section>
-          )}
-
-          {/* Sensitivity Matrix */}
-          {valuation.sensitivity_matrix && (
-            <section>
-              <h3 className="text-lg text-yellow-300 font-semibold mb-2">📊 Valuation Sensitivity Matrix</h3>
-              <pre className="text-xs text-zinc-300 bg-zinc-800 p-4 rounded-lg border border-zinc-700 overflow-x-auto">
-                {JSON.stringify(valuation.sensitivity_matrix, null, 2)}
-              </pre>
-            </section>
-          )}
-
-          {/* Commentary */}
-          {valuation.commentary && (
-            <section>
-              <h3 className="text-lg text-pink-300 font-semibold mb-2">🧠 Analyst Commentary</h3>
-              <p className="text-sm text-zinc-300 italic bg-zinc-800 p-4 rounded-lg border border-zinc-700">
-                {valuation.commentary}
-              </p>
-            </section>
-          )}
-
-          {/* Notes */}
-          <div className="text-sm text-zinc-400 mt-4 italic">
-            <p>Note: Valuation figures are based on latest available data.</p>
-            <p>As of: {valuation.as_of_date || "N/A"}</p>
+          {/* Footer Note */}
+          <div className="text-sm text-zinc-500 mt-2 italic">
+            As of: {valuation.as_of_date || "N/A"}
           </div>
-        </>
+        </div>
       )}
     </div>
   )
