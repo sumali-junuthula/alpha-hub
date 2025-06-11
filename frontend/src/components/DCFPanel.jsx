@@ -25,27 +25,47 @@ export default function DCFPanel({ ticker }) {
   if (!ticker) return null
 
   return (
-    <div className="mt-10 bg-zinc-900 p-6 rounded-xl shadow-lg ring-1 ring-zinc-700">
-      <h2 className="text-2xl font-bold text-orange-300 mb-4">📊 Discounted Cash Flow (DCF)</h2>
+    <div className="mt-10">
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-6">
+        💡 Discounted Cash Flow (DCF)
+      </h2>
 
       {loading && <p className="text-gray-400">Loading DCF valuation...</p>}
       {error && <p className="text-red-400">{error}</p>}
-      {!loading && dcf && (
-        <div className="text-sm text-zinc-300 space-y-2">
-          <p><span className="text-white font-semibold">Discount Rate (WACC):</span> {(dcf.discount_rate * 100).toFixed(2)}%</p>
-          <p><span className="text-white font-semibold">Terminal Growth Rate:</span> {(dcf.terminal_growth_rate * 100).toFixed(2)}%</p>
-          <p><span className="text-white font-semibold">Terminal Value:</span> ${ (dcf.terminal_value / 1e9).toFixed(2) }B</p>
-          <p><span className="text-white font-semibold">PV of FCFs:</span> ${ (dcf.present_value_of_fcfs / 1e9).toFixed(2) }B</p>
-          <p><span className="text-white font-semibold">PV of Terminal Value:</span> ${ (dcf.present_value_of_terminal / 1e9).toFixed(2) }B</p>
-          <p><span className="text-white font-semibold">Total DCF Valuation:</span> ${ (dcf.total_dcf_valuation / 1e9).toFixed(2) }B</p>
 
-          <div className="mt-3">
-            <p className="underline mb-1">Projected Free Cash Flows:</p>
-            <ul className="list-disc list-inside">
-              {dcf.projected_fcfs.map((fcf, i) => (
-                <li key={i}>Year {i + 1}: ${(fcf / 1e9).toFixed(2)}B</li>
-              ))}
-            </ul>
+      {!loading && dcf && (
+        <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-5 transition-all duration-300 ease-in-out hover:border-blue-500 hover:shadow-[0_0_10px_#3b82f6]">
+          <p className="text-sm text-blue-400 mb-2">💡 | 📊</p>
+          <h3 className="text-lg font-bold text-blue-200 mb-4">DCF Valuation Breakdown</h3>
+
+          <div className="text-sm text-zinc-300 space-y-3">
+            <p>
+              <span className="text-white font-medium">Discount Rate (WACC):</span> {(dcf.discount_rate * 100).toFixed(2)}%
+            </p>
+            <p>
+              <span className="text-white font-medium">Terminal Growth Rate:</span> {(dcf.terminal_growth_rate * 100).toFixed(2)}%
+            </p>
+            <p>
+              <span className="text-white font-medium">Terminal Value:</span> ${(dcf.terminal_value / 1e9).toFixed(2)}B
+            </p>
+            <p>
+              <span className="text-white font-medium">PV of Free Cash Flows:</span> ${(dcf.present_value_of_fcfs / 1e9).toFixed(2)}B
+            </p>
+            <p>
+              <span className="text-white font-medium">PV of Terminal Value:</span> ${(dcf.present_value_of_terminal / 1e9).toFixed(2)}B
+            </p>
+            <p className="text-blue-300 font-semibold">
+              Total DCF Valuation: ${(dcf.total_dcf_valuation / 1e9).toFixed(2)}B
+            </p>
+
+            <div className="mt-4">
+              <p className="text-blue-400 font-semibold mb-2">🗓️ Projected Free Cash Flows</p>
+              <ul className="list-disc list-inside space-y-1 text-zinc-300">
+                {dcf.projected_fcfs.map((fcf, i) => (
+                  <li key={i}>Year {i + 1}: ${(fcf / 1e9).toFixed(2)}B</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       )}
