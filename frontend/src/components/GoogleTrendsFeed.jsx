@@ -83,7 +83,7 @@ export default function GoogleTrendsFeed({ ticker }) {
 
   return (
     <div className="mt-10 bg-zinc-900 p-6 rounded-xl shadow-lg ring-1 ring-zinc-700">
-      <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-300 to-blue-200 drop-shadow-lg mb-6 tracking-tight">
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-6">
         🔍 Google Trends
       </h2>
       {trend && (
