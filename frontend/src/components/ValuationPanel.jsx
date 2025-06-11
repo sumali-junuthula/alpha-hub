@@ -93,32 +93,27 @@ export default function ValuationPanel({ ticker }) {
               icon: "🧪 | 🔬",
               title: "Sensitivity Matrix",
               content: (
-                <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-5 transition-all duration-300 ease-in-out hover:border-blue-500 hover:shadow-[0_0_10px_#3b82f6]">
-                  <p className="text-sm text-blue-400 mb-2">🧪 | 🔬</p>
-                  <h3 className="text-lg font-bold text-blue-200 mb-4">Sensitivity Matrix</h3>
-
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full text-sm text-zinc-300 border-collapse">
-                      <thead>
-                        <tr className="text-blue-300 border-b border-zinc-700">
-                          <th className="px-3 py-2 text-left">Metric</th>
-                          {Object.keys(valuation.sensitivity_matrix[0]).filter(key => key !== "metric").map((col, idx) => (
-                            <th key={idx} className="px-3 py-2 text-left">{col}</th>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full text-sm text-zinc-300 border-collapse">
+                    <thead>
+                      <tr className="text-blue-300 border-b border-zinc-700">
+                        <th className="px-3 py-2 text-left">Metric</th>
+                        {Object.keys(valuation.sensitivity_matrix[0]).filter(key => key !== "metric").map((col, idx) => (
+                          <th key={idx} className="px-3 py-2 text-left">{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {valuation.sensitivity_matrix.map((row, idx) => (
+                        <tr key={idx} className="border-b border-zinc-800 hover:bg-zinc-800/50">
+                          <td className="px-3 py-2 font-medium text-white">{row.metric}</td>
+                          {Object.keys(row).filter(k => k !== "metric").map((k, i) => (
+                            <td key={i} className="px-3 py-2">{row[k]}</td>
                           ))}
                         </tr>
-                      </thead>
-                      <tbody>
-                        {valuation.sensitivity_matrix.map((row, idx) => (
-                          <tr key={idx} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                            <td className="px-3 py-2 font-medium text-white">{row.metric}</td>
-                            {Object.keys(row).filter(k => k !== "metric").map((k, i) => (
-                              <td key={i} className="px-3 py-2">{row[k]}</td>
-                            ))}
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )
             },
