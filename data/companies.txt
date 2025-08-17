@@ -1,0 +1,94 @@
+NVDA, NVIDIA
+MSFT, Microsoft
+AAPL, Apple
+GOOGL, Alphabet
+AMZN, Amazon
+GOOG, Alphabet
+META, Meta Platforms
+AVGO, Broadcom
+TSLA, Tesla
+BRK.B, Berkshire Hathaway
+JPM, JPMorgan Chase
+WMT, Walmart
+ORCL, Oracle
+V, Visa
+LLY, Eli Lilly
+NFLX, Netflix
+MA, Mastercard
+XOM, ExxonMobil
+COST, Costco
+JNJ, Johnson & Johnson
+PLTR, Palantir Technologies
+HD, Home Depot
+ABBV, AbbVie
+PG, Procter & Gamble
+BAC, Bank of America
+CVX, Chevron
+KO, Coca-Cola
+AMD, Advanced Micro Devices
+TMUS, T-Mobile US
+GE, GE Aerospace
+UNH, UnitedHealth Group
+CSCO, Cisco
+PM, Philip Morris International
+WFC, Wells Fargo
+CRM, Salesforce
+MS, Morgan Stanley
+ABT, Abbott Laboratories
+MCD, McDonald’s
+CVX, Chevron
+LIN, Linde
+NOW, ServiceNow
+DIS, Walt Disney
+ACN, Accenture
+T, AT&T
+ISRG, Intuitive Surgical
+MRK, Merck
+UBER, Uber Technologies
+GS, Goldman Sachs
+INTU, Intuit
+VZ, Verizon
+ADBE, Adobe
+RTX, RTX
+PEP, PepsiCo
+BKNG, Booking Holdings
+TXN, Texas Instruments
+QCOM, Qualcomm
+PGR, Progressive
+CAT, Caterpillar
+SPGI, S&P Global
+DHR, Danaher
+BLK, BlackRock
+SYK, Stryker
+NEE, NextEra Energy
+BA, Boeing
+PFE, Pfizer
+HON, Honeywell
+GILD, Gilead Sciences
+C, Citigroup
+UNP, Union Pacific
+VRTX, Vertex Pharmaceuticals
+CMCSA, Comcast
+DE, Deere
+LOW, Lowe’s
+AMAT, Applied Materials
+ADP, Automatic Data Processing
+PANW, Palo Alto Networks
+COP, ConocoPhillips
+ETN, Eaton
+LMT, Lockheed Martin
+CB, Chubb
+MMC, Marsh & McLennan
+MDT, Medtronic
+CRWD, CrowdStrike
+BX, Blackstone
+GEV, GE Vernova
+KKR, KKR
+SO, Southern Company
+AMT, American Tower
+MO, Altria
+FI, Fiserv
+ANET, Arista Networks
+BMY, Bristol-Myers Squibb
+ADI, Analog Devices
+CME, CME Group
